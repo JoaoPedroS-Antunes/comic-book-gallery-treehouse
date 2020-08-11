@@ -1,8 +1,19 @@
-﻿
+﻿@model ComicBookGallery.Models.ComicBook[]
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Comic Books";
 }
 
-<h1>Index</h1>
+<h1>@ViewBag.Title</h1>
 
+
+<div class="row">
+    @foreach (var comicBook in Model)
+    {
+        <div class="col-md-3">
+            <h4>@comicBook.DisplayText</h4>
+            <img src="~/lib/Images/@comicBook.CoverImageFileName"
+                 alt="@comicBook.DisplayText"
+                 class="img-responsive" />
+        </div>
+    }
+</div>
