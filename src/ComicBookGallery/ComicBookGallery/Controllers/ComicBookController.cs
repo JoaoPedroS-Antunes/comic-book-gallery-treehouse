@@ -10,9 +10,21 @@ namespace ComicBookGallery.Controllers
 {
     public class ComicBookController : Controller
     {
-        public ActionResult Detail()
+        private ComicBookRepository _comicBookRepository = null;
+
+        public ComicBookController()
         {
-            return View();
+            _comicBookRepository = new ComicBookRepository();
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound("Error: The book for the specified ID was not found...");
+            }
+            ComicBook comicBook = _comicBookRepository.GetComicBook((int)id);
+            return View(comicBook);
         }
     }
 }
